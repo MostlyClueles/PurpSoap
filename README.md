@@ -28,11 +28,10 @@ Stock Data:
 
 Give comma spaced values
 1) Stock Abbreviation 
-  -ex. goog
+    -ex. goog
 2) Number of business days out that you want to forecast 
-  -ex. 20
+    -ex. 20
 3) Forecasting Model Abbreviation
-  -Options include
     - randwalk: random walk
     - driftrandwalk: drifting random walk
     - georandwalk: geometric random walk
@@ -41,7 +40,6 @@ Give comma spaced values
     - dses: Brown's Linear Exponential Smoothing / Double exponential smoothing
     - hles: Holt's Linear Exponential Smoothing
 4) Variable \(Optional\)
-  -Options include
     - Open
     - High
     - Low

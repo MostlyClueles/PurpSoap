@@ -1,0 +1,26 @@
+---------------------------------------------------------------------------
+
+                       [0]  [1]  [2]   [3]
+                        ^    ^    ^     ^
+Example -> Stock Data: goog, 15, holt, open
+
+This will give you a 15 business day prediction of Google's stock with
+respect to Holt's model using opening price data.
+
+Comma spaced values inputed are as follows (starting at 0):
+
+    [0] = Stock Abbreviation
+
+    [1] = Number of Business days
+
+    [2] = Forecast Model
+          Input options include:
+
+    [3] = Variable (Default = Adj Close)
+          Input options include: open, high, low, close, adj_close, volume
+
+          Note: Generally do NOT change this it is best to get a forecast
+          with respect to the Adjusted Close value (this is mostly for
+          a flexible code which can be adjusted to handle different types
+          of data)
+---------------------------------------------------------------------------

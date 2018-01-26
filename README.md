@@ -16,15 +16,15 @@ I included the \#!/usr/bin/env python3 as a header for everyone using linux, so 
 ### How to run it
 in terminal
 
-'''
+```
 cd ~/PurpSoap/lib
 python3 main.py
-'''
+```
 
 When given the screen
-'''
+```
 Stock Data:
-'''
+```
 
 Give comma spaced values
 0) Stock Abbreviation 

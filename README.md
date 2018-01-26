@@ -56,7 +56,3 @@ This returns amazons stock forecasted about 1 year ahead using Brown's Model
 
 or type help for a help list
 
-### Run for windows
-I haven't tested this out, but I ran pyinstaller and it didn't throw an error. So its probably great!
-
-Just open windows folder, then dist, then run main.exe and then just input with respect to the list above.

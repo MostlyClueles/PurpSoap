@@ -13,7 +13,8 @@ It's all built in python 3, so that along with the python libraries:
   
 I included the \#!/usr/bin/env python3 as a header for everyone using linux, so make sure to pip3 those libraries instead of just using the normal pip
 
-### How to run it
+### How to run it /(Using only python\)
+
 in terminal
 
 ```
@@ -28,9 +29,9 @@ Stock Data:
 
 Give comma spaced values
 1) Stock Abbreviation 
-    -ex. goog
+    - ex. goog
 2) Number of business days out that you want to forecast 
-    -ex. 20
+    - ex. 20
 3) Forecasting Model Abbreviation
     - randwalk: random walk
     - driftrandwalk: drifting random walk
@@ -44,6 +45,18 @@ Give comma spaced values
     - High
     - Low
     - Close
-    - Adj_Close
+    - Adj_Close = Default
     - Volume
+    
+Example
+```
+Stock Data: amzn, 260, dles
+```
+This returns amazons stock forecasted about 1 year ahead using Brown's Model
 
+or type help for a help list
+
+### Run for windows
+I haven't tested this out, but I ran pyinstaller and it didn't throw an error. So its probably great!
+
+Just open windows folder, then dist, then run main.exe and then just input with respect to the list above.

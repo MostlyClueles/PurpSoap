@@ -17,6 +17,7 @@ def randwalk(df, f_len, var):
     #random walk
 
     #all f_base transformations
+    period = f_base.full_period(df, f_len, var)
     df1 = f_base.hist_data(df, var)
     df2 = f_base.randwalk(df, f_len, var)
 
@@ -27,14 +28,16 @@ def randwalk(df, f_len, var):
     #combinde dataframes by Date, so there will be NaN values
     #   after today in the historica data value section
 
-    df = f_base.centralize(df)
+    df = f_base.centralize(df, period[2])
 
     return df
+
 
 def randwalk_drift(df, f_len, var):
     #random walk with drift
 
     #all f_base transformations
+    period = f_base.full_period(df, f_len, var)
     df1 = f_base.hist_data(df, var)
     df2 = f_base.randwalk(df, f_len, var)
 
@@ -52,7 +55,7 @@ def randwalk_drift(df, f_len, var):
     #combinde dataframes by Date, so there will be NaN values
     #   after today in the historica data value section
 
-    df = f_base.centralize(df)
+    df = f_base.centralize(df, period[2])
 
     return df
 
@@ -61,6 +64,7 @@ def randwalk_geo(df, f_len, var):
     #geometric random walk
 
     #all f_base transformations
+    period = f_base.full_period(df, f_len, var)
     df1 = f_base.hist_data(df, var)
     df2 = f_base.randwalk(df, f_len, var)
     alpha = f_base.alpha(f_len)
@@ -75,7 +79,7 @@ def randwalk_geo(df, f_len, var):
     #combinde dataframes by Date, so there will be NaN values
     #   after today in the historica data value section
 
-    df = f_base.centralize(df)
+    df = f_base.centralize(df, period[2])
 
     return df
 
@@ -112,9 +116,10 @@ def savg(df, f_len, var):
     df = pd.concat([df1, df2, df3], axis=1)
     #put together all of the columns
 
-    df = f_base.centralize(df)
+    df = f_base.centralize(df, period[2])
 
     return df
+
 
 def ses(df, f_len, var):
     #Brown's Simple Exponential Smoothing (1-step)
@@ -159,7 +164,7 @@ def ses(df, f_len, var):
     df = pd.concat([df1, df2, df3], axis=1)
     #put together all of the columns
 
-    df = f_base.centralize(df)
+    df = f_base.centralize(df, period[2])
 
     return df
 
@@ -169,13 +174,14 @@ def dses(df, f_len, var):
     #Trend is NOT removed
 
     #all f_base transformations
+    period = f_base.full_period(df, f_len, var)
     df1 = f_base.hist_data(df, var)
     alpha = f_base.alpha(f_len)
 
-    smooth = overlay.ses_overlay(df, f_len, var)
+    smooth = overlay.ses_overlay(df, 1, var)
     #smooths the dataframe
 
-    dsmooth = overlay.ses_overlay(smooth, f_len, 'Overlay')
+    dsmooth = overlay.ses_overlay(smooth, 1, 'Overlay')
     #double smoothed dataframe
 
     dsmooth.index = dsmooth.index - pd.tseries.offsets.BDay(1)
@@ -204,7 +210,7 @@ def dses(df, f_len, var):
     df = pd.concat([df1, df2, df3], axis=1)
     #put together all of the columns
 
-    df = f_base.centralize(df)
+    df = f_base.centralize(df, period[2])
 
     return df
 
@@ -214,14 +220,15 @@ def hles(df, f_len, var):
     #Trend is NOT removed
 
     #all f_base transfromations
+    period = f_base.full_period(df, f_len, var)
     df1 = f_base.hist_data(df, var)
     alpha = f_base.alpha(f_len)
     beta = f_base.beta(f_len)
 
-    smooth = overlay.ses_overlay(df, f_len, var)
+    smooth = overlay.ses_overlay(df, 1, var)
     #smooths the dataframe
 
-    dsmooth = overlay.ses_overlay(smooth, f_len, 'Overlay')
+    dsmooth = overlay.ses_overlay(smooth, 1, 'Overlay')
     #double smoothed dataframe
 
     dsmooth.index = dsmooth.index - pd.tseries.offsets.BDay(1)
@@ -268,10 +275,28 @@ def hles(df, f_len, var):
 
     df = pd.concat([df1, forecast, validation], axis=1)
 
-    df = f_base.centralize(df)
+    df = f_base.centralize(df, period[2])
 
     return df
 
+def lin_reg(df, f_len, var):
+    #linear regression
+    '''
+    THIS DOES NOT WORK YET
+    '''
+
+    #all f_base transfromations
+    period = f_base.full_period(df, f_len, var)
+    df1 = f_base.hist_data(df, var)
+
+    df2 = overlay.ses_overlay(df, 1, var)
+    df2 = df2.rename(columns={'Overlay' : 'Forecast'})
+
+    x = len(df2)
+
+    df2 = df2.loc[:, 'Forecast'].between(1,x+1)
+
+    return df2
 
 
 

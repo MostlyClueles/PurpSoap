@@ -16,9 +16,9 @@ df = pd.read_csv('ea.csv', index_col=0, parse_dates=True)
 #x = forecast.sma(df, 3,'Open')
 
 
-x = forecast.randwalk_geo(df, 20, 'Adj Close')
+x = forecast.lin_reg(df, 5, 'Adj Close')
 
-print(x.head(33))
+print(x)
 
 
 

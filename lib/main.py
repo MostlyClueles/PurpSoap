@@ -108,9 +108,10 @@ print('MAE = ' + str(mae) + '\nAverage Error = ' + str(avg_err) +\
 
 plottin.b_plot(f_df, usr_input[1], usr_input[3], usr_input[0], \
     usr_input[2], today)
-print(type(usr_input[2]))
-plt.show()
+#makes a basic plot but doesn't show it
 
+plt.show()
+#shows the plot which was made in plottin
 
 
 

@@ -151,17 +151,16 @@ Post-processing Operations:
     3 columns.
 '''
 
-def centralize(df):
+def centralize(df, periodtwo):
     #takes the forecast and sets the forecast price of today to the
     #   stock price of today. Does the same operation with validation
     #   period except gets it centralized with respect to
     #   (today - number of business days the user put in) = start of
     #   validation period.
+    #   MUST use full_period[2] otherwise the program breaks on
+    #   weekends.
 
-    today = dt.date.today()
-    #for getting today till end of forecast length
-
-    f_len = len(df.loc[today:, 'Forecast'])
+    f_len = len(df.loc[periodtwo:, 'Forecast'])
     #because weekends we don't actucally know how many forecast days
     #   there are so this just takes the length and holidays don't help
 

@@ -4,7 +4,6 @@ import matplotlib as style
 import datetime as dt
 
 
-
 def b_plot(df, f_len, var, stock, f_abb, today):
     #basic plot
     del df['Valid'] #remove this after you make code pretty
@@ -12,6 +11,9 @@ def b_plot(df, f_len, var, stock, f_abb, today):
     plt.style.use('ggplot')
     #ggplot mimics the plotting in R. Other options can be found with
     #   the command: print(plt.style.available)
+
+    today = today.date()
+    #takes off the hours-minutes-seconds which looks better
 
     plt.plot(df)
 
